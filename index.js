@@ -3,6 +3,7 @@ const passport = require('passport')
 const cors = require('cors')
 const mongoose = require('mongoose')
 
+require('dotenv').config()
 mongoose.connect('mongodb://localhost/doctor')
 require('./src/config/passport')
 
