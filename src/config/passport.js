@@ -25,7 +25,8 @@ passport.use(
       } else {
         new Users({
           username: profile.displayName,
-          google_id: profile.id
+          google_id: profile.id,
+          email: profile.emails[0].value
         }).save().then((data) => {
           done(null, data)
         })
