@@ -1,9 +1,12 @@
 const express = require('express')
 const passport = require('passport')
+const jwt = require('jsonwebtoken')
 const router = express.Router()
 
-router.get('/login', (req, res) => {
-  res.send('login')
+const jwt_token = require('../middlewares/jwt-token')
+
+router.get('/login', jwt_token, (req, res) => {
+  res.send(req.auth)
 })
 
 router.get('/logout', (req, res) => {
@@ -11,11 +14,12 @@ router.get('/logout', (req, res) => {
 })
 
 router.get('/google', passport.authenticate('google', {
-  scope: ['profile']
+  scope: ['profile', 'email']
 }))
 
 router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
-  res.send(req.user)
+  let token = jwt.sign({ user: req.user }, process.env.JWT_SECRET)
+  res.send({ token, data: req.user })
 })
 
 module.exports = router
