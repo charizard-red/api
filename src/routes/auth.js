@@ -9,10 +9,6 @@ router.get('/login', jwt_token, (req, res) => {
   res.send(req.auth)
 })
 
-router.get('/logout', (req, res) => {
-  res.send('logout')
-})
-
 router.get('/google', passport.authenticate('google', {
   scope: ['profile', 'email']
 }))
