@@ -17,4 +17,4 @@ const data_schema = Schema({
   doctors: [{ type: Schema.Types.ObjectId, ref: 'Doctors' }]
 })
 
-module.exports = mongoose.model('Users', data_schema)
+module.exports = mongoose.model('Clinics', data_schema)
