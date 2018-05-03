@@ -9,6 +9,7 @@ module.exports = (req, res, next) => {
       if(!err){
         Users.findOne(data.user).then(data_user => {
           req.auth = data_user
+          req.user_id = data_user._id
           next()
         }).catch(err => res.send({ text: 'error', msg: err }))
       } else {

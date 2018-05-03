@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const OrdersSchema = Schema({
   user_id: { type: Schema.Types.ObjectId, ref: 'Users' },
   specialist:String,
-  time:Date
+  time: { type: Date, default: Date.now }
 })
 
 module.exports = mongoose.model('Orders', OrdersSchema)
