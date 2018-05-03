@@ -2,6 +2,8 @@ const express = require('express');
 const Order = require('../models/Order');
 const router = express.Router();
 
+const jwt_token = require('../middlewares/jwt-token')
+
 router.get('/', (req,res) => {
   Order.find({}).exec(function(error, Orders){
     if (error) return res.send(error)
@@ -16,7 +18,7 @@ router.get('/:id', (req,res) => {
   });
 });
 
-router.post('/', (req,res) => {
+router.post('/', jwt_token, (req,res) => {
   if(req.auth.data_complete==false) return res.send({ test: 'error', msg: 'User data is not complete' })
   Order.create({
     user_id: req.user_id,
