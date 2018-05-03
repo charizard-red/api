@@ -4,8 +4,7 @@ const router = express.Router();
 
 router.get('/', (req,res) => {
   Order.find({}).exec(function(error, Orders){
-    if (error)
-      res.send(error)
+    if (error) return res.send(error)
     res.send({data: Orders})
   });
 });
