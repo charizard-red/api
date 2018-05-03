@@ -4,8 +4,9 @@
   "description": "Final project",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "postinstall": "mkdir -p /data/img"
+    "postinstall": "./setup.sh",
+    "dev": "nodemon index",
+    "start": "node index"
   },
   "author": "Charizard Red",
   "license": "ISC",
@@ -19,5 +20,8 @@
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
     "uniqid": "^4.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "1.17.3"
   }
 }
