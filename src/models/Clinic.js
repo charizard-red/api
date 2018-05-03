@@ -7,11 +7,6 @@ const data_schema = Schema({
   photo: String,
   phone: String,
   address: String,
-  place: {
-    lat: String,
-    lon: String
-  },
-  website: String,
   services: Array,
   postal_code: Number,
   doctors: [{ type: Schema.Types.ObjectId, ref: 'Doctors' }]
