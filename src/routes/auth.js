@@ -21,6 +21,7 @@ router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
 
 router.post('/login/complete', jwt_token, (req, res) => {
   Users.update({ _id: req.auth._id }, { $set: {
+    data_complete: true,
     data: {
       gender: req.body.gender,
       phone: req.body.phone,

@@ -4,6 +4,7 @@ const data_schema = mongoose.Schema({
   username: String,
   google_id: String,
   email: String,
+  data_complete: Boolean,
   data: {
     gender: String,
     phone: String,
