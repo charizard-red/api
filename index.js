@@ -19,5 +19,6 @@ app.use(bodyParser.json())
 
 app.use('/auth', require('./src/routes/auth'))
 app.use('/order', require('./src/routes/Order'))
+app.use('/doctors', require('./src/routes/Doctor'))
 
 app.listen(process.env.PORT || 8000, () => console.log('listening on port 8000'))
