@@ -17,6 +17,7 @@ router.get('/:id', (req,res) => {
 });
 
 router.post('/', (req,res) => {
+  if(req.auth.data_complete==false) return res.send({ test: 'error', msg: 'User data is not complete' })
   Order.create({
     user_id: req.user_id,
     specialist: req.body.specialist

@@ -6,9 +6,11 @@ const router = express.Router()
 const Clinic = require('../models/Clinic')
 
 router.get('/', (req, res) => {
-  Clinic.find().then((data) => {
-    res.send(data)
-  }).catch(err => res.send({ text: 'error', msg: err }))
+  Clinic.find({}).exec(function(error, Doctors){
+    if (error)
+      res.send(error)
+    res.send({data: Doctors })
+  });
 })
 
 router.post('/', (req, res) => {
@@ -28,7 +30,6 @@ router.post('/', (req, res) => {
       photo: filename,
       phone: req.body.phone,
       address: req.body.address,
-      // services: req.body.services,
       postal_code: req.body.postal_code,
     }).save()
     .then(data => res.send({ text: "success", data: data }))
