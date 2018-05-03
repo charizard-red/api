@@ -18,8 +18,8 @@ app.use(express_fileupload());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.use("/auth", require("./src/routes/auth"));
 app.use("/", require("./src/routes/index"));
+app.use("/auth", require("./src/routes/auth"));
 app.use("/clinics", require("./src/routes/clinics"));
 app.use("/orders", require("./src/routes/orders"));
 app.use("/doctors", require("./src/routes/doctors"));
