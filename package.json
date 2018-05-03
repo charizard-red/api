@@ -4,7 +4,8 @@
   "description": "Final project",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "postinstall": "mkdir -p /data/img"
   },
   "author": "Charizard Red",
   "license": "ISC",

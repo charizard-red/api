@@ -17,9 +17,9 @@ router.post('/', (req, res) => {
     if(mime == 'image/png') return '.png'
     if(mime == 'image/jpeg') return '.jpg'
   }
-  let image_id = uniqid()
+  let image_id = uniqid("clinic")
   let filename = image_id + getName(req.files.icon.mimetype)
-  fs.writeFile('public/img/clinic/' + filename, req.files.icon.data, (err) => {
+  fs.writeFile('public/img/' + filename, req.files.icon.data, (err) => {
     if (err) throw err;
     // -------------------------------------------------------------------------
     new Clinic({

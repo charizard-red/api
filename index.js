@@ -18,5 +18,7 @@ app.use(express.json())
 
 app.use('/auth', require('./src/routes/auth'))
 app.use('/clinic', require('./src/routes/clinic'))
+app.use('/orders', require('./src/routes/orders'))
+app.use('/doctors', require('./src/routes/doctor'))
 
 app.listen(process.env.PORT || 8000, () => console.log('listening on port 8000'))
