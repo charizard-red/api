@@ -39,15 +39,27 @@ router.post('/', (req, res) => {
 })
 
 router.get('/:id', (req, res) => {
-  res.send('get a clinic info')
+  Clinic.findOne({ id: req.params.id }).then(data => {
+    res.send({ text: 'success', data: data })
+  })
 })
 
 router.put('/:id', (req, res) => {
-  res.send('update a clinic')
+  Clinic.findByIdAndUpdate({_id:req.params.id},req.body).then(function(){
+    Clinic.findOne({_id:req.params.id}).then(function(error, Doctors){
+    if(error)
+      res.send(error)
+    res.send({data:Doctors});
+    });
+  });
 })
 
 router.delete('/:id', (req, res) => {
-  res.send('delete a clinic')
+  Clinic.findByIdAndRemove({_id:req.params.id}).then(function(data){
+    if(error)
+      res.send(error)
+    res.send({data:data});
+  });
 })
 
 module.exports = router
