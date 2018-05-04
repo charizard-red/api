@@ -15,22 +15,20 @@ npm start
 
 ## API Endpoints
 
-| HTTP   | Routes         | Description |
-| ------ | -------------- | ----------- |
-| GET    | `/`            | ...         |
-| GET    | `/auth`        | ...         |
-| GET    | `/clinics`     | ...         |
-| POST   | `/clinics`     | ...         |
-| DELETE | `/clinics`     | ...         |
-| DELETE | `/clinics/:id` | ...         |
-| PUT    | `/clinics/:id` | ...         |
-| GET    | `/orders`      | ...         |
-| POST   | `/orders`      | ...         |
-| DELETE | `/orders`      | ...         |
-| DELETE | `/orders/:id`  | ...         |
-| PUT    | `/orders/:id`  | ...         |
-| GET    | `/doctors`     | ...         |
-| POST   | `/doctors`     | ...         |
-| DELETE | `/doctors`     | ...         |
-| DELETE | `/doctors/:id` | ...         |
-| PUT    | `/doctors/:id` | ...         |
+| HTTP   | Routes         | Description                     |
+| ------ | -------------- | ------------------------------- |
+| GET    | `/`            | ...                             |
+| GET    | `/auth/google` | authenticate person with google |
+| GET    | `/clinics`     | get all clinic                  |
+| POST   | `/clinics`     | add a clinic                    |
+| GET    | `/clinics/:id` | get a clinic                    |
+| DELETE | `/clinics/:id` | delete a clinic                 |
+| PUT    | `/clinics/:id` | update a clinic                 |
+| GET    | `/orders`      | get all orders                  |
+| POST   | `/orders`      | add an order                    |
+| DELETE | `/orders/:id`  | delete an order                 |
+| PUT    | `/orders/:id`  | update an order                 |
+| GET    | `/doctors`     | get all doctors                 |
+| POST   | `/doctors`     | add a doctor                    |
+| DELETE | `/doctors/:id` | delete a doctor                 |
+| PUT    | `/doctors/:id` | update a doctor                 |
