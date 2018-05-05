@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const data_schema = mongoose.Schema({
   username: String,
   google_id: String,
+  password: String,
   email: String,
   data_complete: Boolean,
   data: {
