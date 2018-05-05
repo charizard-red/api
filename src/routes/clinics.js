@@ -4,15 +4,16 @@ const fs = require('fs')
 const router = express.Router()
 
 const Clinic = require('../models/Clinic')
+const jwt_token = require('../middlewares/jwt-token')
 
 router.get('/', (req, res) => {
-  Clinic.find({}).exec(function(error, data){
+  Clinic.find({}).populate('doctors').exec(function(error, data){
     if (error) return res.send({ text: 'error', msg: error })
     res.send({data: data })
   });
 })
 
-router.post('/', (req, res) => {
+router.post('/', jwt_token, (req, res) => {
   function getName(mime){
     if(mime == 'image/png') return '.png'
     if(mime == 'image/jpeg') return '.jpg'
@@ -20,6 +21,7 @@ router.post('/', (req, res) => {
   let image_id = uniqid("clinic-")
   let filename = image_id + getName(req.files.icon.mimetype)
   new Clinic({
+    user_id: req.user_id,
     title: req.body.title,
     description: req.body.description,
     photo: filename,
