@@ -37,18 +37,6 @@ router.post('/', (req, res) => {
   // ---------------------------------------------------------------------------
 })
 
-router.post('/:id', (req, res) => {
-  Clinic.findByIdAndUpdate({ _id: req.params.id }, {
-    $push: { doctors: req.query.doctor_id }
-  }).then(function(){
-    Clinic.findOne({_id:req.params.id}).then(function(error, Doctors){
-    if(error)
-      res.send(error)
-    res.send({data:Doctors});
-    });
-  });
-})
-
 router.get('/:id', (req, res) => {
   Clinic.findOne({ _id: req.params.id }).then(data => {
     res.send({ text: 'success', data: data })
@@ -57,16 +45,15 @@ router.get('/:id', (req, res) => {
 
 router.put('/:id', (req, res) => {
   Clinic.findByIdAndUpdate({_id:req.params.id},req.body).then(function(){
-    Clinic.findOne({_id:req.params.id}).then(function(error, Doctors){
-    if(error)
-      res.send(error)
-    res.send({data:Doctors});
+    Clinic.findOne({_id:req.params.id}).then(function(data, error){
+    if(error) return res.send(error)
+    res.send({data:data});
     });
   });
 })
 
 router.delete('/:id', (req, res) => {
-  Clinic.findByIdAndRemove({_id:req.params.id}).then(function(data){
+  Clinic.findByIdAndRemove({_id:req.params.id}).then(function(data, error){
     if(error) return res.send(error)
     res.send({data:data});
   });
