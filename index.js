@@ -1,15 +1,16 @@
+require("dotenv").config();
+require("./src/config/passport");
+
 const express = require("express");
 const passport = require("passport");
 const express_fileupload = require("express-fileupload");
 const cors = require("cors");
 const mongoose = require("mongoose");
 
+const PORT = process.env.PORT || 8000;
 const MONGODB_URL = process.env.MONGODB_URL || "mongodb://localhost/doctor";
 
-require("dotenv").config();
 mongoose.connect(MONGODB_URL);
-require("./src/config/passport");
-
 const app = express();
 
 app.use(cors());
@@ -24,6 +25,6 @@ app.use("/clinics", require("./src/routes/clinics"));
 app.use("/orders", require("./src/routes/orders"));
 app.use("/doctors", require("./src/routes/doctors"));
 
-app.listen(process.env.PORT || 8000, () =>
-  console.log("listening on port 8000")
+app.listen(PORT, () =>
+  console.log(`Temu Dokter API is listening on port ${PORT}`)
 );
