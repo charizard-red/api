@@ -53,23 +53,29 @@ router.post('/login', (req, res) => {
   }).catch(err => res.send({ text: 'error', msg: err }))
 })
 
-router.post('/register', jwt_token, (req, res) => {
-  Users.create({
-    username: req.body.username,
-    password: req.body.password,
-    email: req.body.email,
-    data_complete: true,
-    data: {
-      gender: req.body.gender,
-      phone: req.body.phone,
-      address: req.body.address,
-      birth: req.body.birth
+router.post('/register', (req, res) => {
+  Users.findOne({ email: req.body.email }).then(data => {
+    if(data!==null){
+      res.send({ text: 'error', msg: 'User already exist' })
+    } else {
+      new Users({
+        username: req.body.username,
+        password: req.body.password,
+        email: req.body.email,
+        data_complete: true,
+        data: {
+          gender: req.body.gender,
+          phone: req.body.phone,
+          address: req.body.address,
+          birth: req.body.birth
+        }
+      }).save().then(data => {
+        res.send(data)
+      }).catch(err => {
+        res.send(err)
+      })
     }
-  }).then(data => {
-    res.send(data)
-  }).catch(err => {
-    res.send(err)
-  })
+  }).catch(err => res.send({ text: 'error', msg: err }))
 })
 
 module.exports = router
