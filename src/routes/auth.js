@@ -6,7 +6,7 @@ const router = express.Router()
 const Users = require('../models/Users')
 const jwt_token = require('../middlewares/jwt-token')
 
-router.get('/login', jwt_token, (req, res) => {
+router.get('/', jwt_token, (req, res) => {
   res.send(req.auth)
 })
 
@@ -15,12 +15,16 @@ router.get('/google', passport.authenticate('google', {
 }))
 
 router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
-  let token = jwt.sign({ user: req.user }, process.env.JWT_SECRET)
-  res.send({ token, data: req.user })
+  if(req.user.data_complete){
+    let token = jwt.sign({ user: req.user }, process.env.JWT_SECRET)
+    res.send({ token, data: req.user })
+  } else {
+    res.send("DATA BLOM KOMPLIT")
+  }
 })
 
 router.post('/login/complete', jwt_token, (req, res) => {
-  Users.update({ _id: req.auth._id }, { $set: {
+  Users.update({ _id: req.user_id }, { $set: {
     data_complete: true,
     data: {
       gender: req.body.gender,
@@ -29,6 +33,39 @@ router.post('/login/complete', jwt_token, (req, res) => {
       birth: req.body.birth
     }
   }}).then(data => {
+    res.send(data)
+  }).catch(err => {
+    res.send(err)
+  })
+})
+
+router.post('/login', (req, res) => {
+  Users.findOne({
+    email: req.body.email,
+    password: req.body.password
+  }).then(data => {
+    if(data!==null){
+      let token = jwt.sign({ user: data }, process.env.JWT_SECRET)
+      res.send({ token, data })
+    } else {
+      res.send({ text: 'error', msg: 'User data is not exist' })
+    }
+  }).catch(err => res.send({ text: 'error', msg: err }))
+})
+
+router.post('/register', jwt_token, (req, res) => {
+  Users.create({
+    username: req.body.username,
+    password: req.body.password,
+    email: req.body.email,
+    data_complete: true,
+    data: {
+      gender: req.body.gender,
+      phone: req.body.phone,
+      address: req.body.address,
+      birth: req.body.birth
+    }
+  }).then(data => {
     res.send(data)
   }).catch(err => {
     res.send(err)
