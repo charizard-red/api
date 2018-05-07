@@ -44,11 +44,11 @@ router.post('/login', (req, res) => {
     email: req.body.email,
     password: req.body.password
   }).then(data => {
-    if(data!==null){
+    if(data==null){
+      res.send({ text: 'error', msg: 'User data is not exist' })
+    } else {
       let token = jwt.sign({ user: data }, process.env.JWT_SECRET)
       res.send({ token, data })
-    } else {
-      res.send({ text: 'error', msg: 'User data is not exist' })
     }
   }).catch(err => res.send({ text: 'error', msg: err }))
 })
