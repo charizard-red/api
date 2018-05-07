@@ -24,7 +24,7 @@ router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
 })
 
 router.post('/login/complete', jwt_token, (req, res) => {
-  Users.update({ _id: req.user_id }, { $set: {
+  new_data = {
     username: req.body.username,
     email: req.body.email,
     data_complete: true,
@@ -34,8 +34,12 @@ router.post('/login/complete', jwt_token, (req, res) => {
       address: req.body.address,
       birth: req.body.birth
     }
-  }}).then(data => {
-    res.send(data)
+  }
+  Users.update({ _id: req.user_id }, { $set: new_data }).then(data => {
+    Users.findOne({ _id: req.user_id }).then(data => {
+      let token = jwt.sign({ user: new_data }, process.env.JWT_SECRET)
+      res.send({ token, data: new_data })
+    })
   }).catch(err => {
     res.send(err)
   })
