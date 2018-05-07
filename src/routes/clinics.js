@@ -27,6 +27,7 @@ router.post('/', jwt_token, (req, res) => {
     photo: filename,
     phone: req.body.phone,
     address: req.body.address,
+    city: req.body.city,
     postal_code: req.body.postal_code,
   }).save()
   .then(data => {
