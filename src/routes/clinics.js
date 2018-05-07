@@ -23,7 +23,6 @@ router.post('/', jwt_token, (req, res) => {
   new Clinic({
     user_id: req.user_id,
     title: req.body.title,
-    description: req.body.description,
     photo: filename,
     phone: req.body.phone,
     address: req.body.address,

@@ -4,11 +4,10 @@ const Schema = mongoose.Schema
 const data_schema = Schema({
   user_id: { type: Schema.Types.ObjectId, ref: 'Users' },
   title: String,
-  description: String,
   photo: String,
   phone: String,
+  city: String,
   address: String,
-  password: String,
   postal_code: Number,
   doctors: [{ type: Schema.Types.ObjectId, ref: 'Doctors' }]
 })
