@@ -25,7 +25,7 @@ router.post('/', (req,res) => {
   }
   let image_id = uniqid("doctor-")
   let filename = image_id + getName(req.files.icon.mimetype)
-  new Clinic({
+  new Doctor({
     name: req.body.name,
     email: req.body.email,
     phone: req.body.phone,
