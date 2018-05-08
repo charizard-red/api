@@ -19,29 +19,19 @@ router.get('/:id', (req,res) => {
 });
 
 router.post('/', (req,res) => {
-  function getName(mime){
-    if(mime == 'image/png') return '.png'
-    if(mime == 'image/jpeg') return '.jpg'
-  }
-  let image_id = uniqid("doctor-")
-  let filename = image_id + getName(req.files.icon.mimetype)
   new Doctor({
     name: req.body.name,
-    email: req.body.email,
-    phone: req.body.phone,
-    address: req.body.address,
+    time: req.body.time,
+    cost: req.body.cost,
     specialist: req.body.specialist,
     clinic: req.body.clinic
   }).save()
   .then(data => {
-    fs.writeFile('public/img/' + filename, req.files.icon.data, (err) => {
-      if (err) return res.send({ text: 'error', msg: err })
-      Clinic.findByIdAndUpdate({ _id: req.body.clinic }, {
-        $push: { doctors: data._id }
-      }).then(data_clinic => {
-        res.send({ data: data });
-      }).catch(err => res.send({ text: 'error', msg: err }))
-    })
+    Clinic.findByIdAndUpdate({ _id: req.body.clinic }, {
+      $push: { doctors: data._id }
+    }).then(data_clinic => {
+      res.send({ data: data });
+    }).catch(err => res.send({ text: 'error', msg: err }))
   })
   .catch(err => res.send({ text: "error", msg: err }))
   // ---------------------------------------------------------------------------

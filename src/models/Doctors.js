@@ -3,9 +3,12 @@ const Schema = mongoose.Schema
 
 const data_schema = Schema({
   name: String,
-  email: String,
-  phone: String,
-  address: String,
+  time: {
+    days: Array,
+    from: String,
+    until: String
+  },
+  cost: String,
   specialist: String,
   clinic: { type: Schema.Types.ObjectId, ref: 'Clinics' }
 })
