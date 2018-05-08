@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const OrdersSchema = Schema({
   user_id: { type: Schema.Types.ObjectId, ref: 'Users' },
-  specialist:String,
+  doctor_id: { type: Schema.Types.ObjectId, ref: 'Doctors' },
   time: { type: Date, default: Date.now }
 })
 

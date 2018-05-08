@@ -7,7 +7,8 @@ module.exports = (req, res, next) => {
     let token = header.split(" ")[1]
     jwt.verify(token, process.env.JWT_SECRET, (err, data) => {
       if(!err){
-        Users.findOne(data.user).then(data_user => {
+        Users.findOne({ _id: data.user }).then(data_user => {
+          if(data_user == null) return res.send({ text: 'error', msg: 'User is not exist' })
           req.auth = data_user
           req.user_id = data_user._id
           next()

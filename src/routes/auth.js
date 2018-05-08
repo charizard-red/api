@@ -37,7 +37,7 @@ router.post('/login/complete', jwt_token, (req, res) => {
   }
   Users.update({ _id: req.user_id }, { $set: new_data }).then(data => {
     Users.findOne({ _id: req.user_id }).then(data => {
-      let token = jwt.sign({ user: new_data }, process.env.JWT_SECRET)
+      let token = jwt.sign({ user: data._id }, process.env.JWT_SECRET)
       res.send({ token, data: new_data })
     })
   }).catch(err => {
@@ -53,7 +53,7 @@ router.post('/login', (req, res) => {
     if(data==null){
       res.send({ text: 'error', msg: 'User data is not exist' })
     } else {
-      let token = jwt.sign({ user: data }, process.env.JWT_SECRET)
+      let token = jwt.sign({ user: data._id }, process.env.JWT_SECRET)
       res.send({ token, data })
     }
   }).catch(err => res.send({ text: 'error', msg: err }))
