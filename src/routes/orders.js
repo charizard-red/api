@@ -22,12 +22,11 @@ router.post('/', jwt_token, (req,res) => {
   if(req.auth.data_complete==false) return res.send({ test: 'error', msg: 'User data is not complete' })
   Order.create({
     user_id: req.user_id,
-    specialist: req.body.specialist
-  }).then(function(error, Orders){
-    if(error)
-      res.send(error);
-    res.send({data:resources});
-  });
+    doctor_id: req.body.specialist,
+    day: req.body.day
+  }).then(data => {
+    res.send({data:data});
+  }).catch(err => res.send({text: 'error', msg: err }))
 });
 
 router.put('/:id', (req,res) => {
