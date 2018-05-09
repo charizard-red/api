@@ -14,4 +14,10 @@ const data_schema = mongoose.Schema({
   }
 })
 
+data_schema.pre('find', (next) => {
+  this.select({
+    password: 0
+  })
+})
+
 module.exports = mongoose.model('Users', data_schema)

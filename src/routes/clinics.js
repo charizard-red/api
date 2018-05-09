@@ -7,7 +7,7 @@ const Clinic = require('../models/Clinic')
 const jwt_token = require('../middlewares/jwt-token')
 
 router.get('/', (req, res) => {
-  Clinic.find({}).populate('doctors').exec(function(error, data){
+  Clinic.find({ verified: true }).populate('doctors').exec(function(error, data){
     if (error) return res.send({ text: 'error', msg: error })
     res.send({data: data })
   });
@@ -34,6 +34,16 @@ router.post('/', jwt_token, (req, res) => {
   })
   .catch(err => res.send({ text: "error", msg: err }))
   // ---------------------------------------------------------------------------
+})
+
+router.post('/:id', (req, res) => {
+  Clinic.findByIdAndUpdate({ _id: req.params.id }, {
+    verified: true
+  }).then(data => {
+    res.send({ data: data })
+  }).catch(err => {
+    res.send({ text: 'error', msg: err })
+  })
 })
 
 router.get('/:id', (req, res) => {

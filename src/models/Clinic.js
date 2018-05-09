@@ -3,6 +3,7 @@ const Schema = mongoose.Schema
 
 const data_schema = Schema({
   user_id: { type: Schema.Types.ObjectId, ref: 'Users' },
+  verified: Boolean,
   title: String,
   photo: String,
   phone: String,
