@@ -13,6 +13,13 @@ router.get('/', (req, res) => {
   });
 })
 
+router.get('/admin', (req, res) => {
+  Clinic.find({}).populate('doctors').exec(function(error, data){
+    if (error) return res.send({ text: 'error', msg: error })
+    res.send({data: data })
+  });
+})
+
 router.post('/', jwt_token, (req, res) => {
   // function getName(mime){
   //   if(mime == 'image/png') return '.png'
