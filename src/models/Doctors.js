@@ -3,6 +3,7 @@ const Schema = mongoose.Schema
 
 const data_schema = Schema({
   name: String,
+  photo: String,
   time: {
     days: Array,
     from: String,
