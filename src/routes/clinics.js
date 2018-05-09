@@ -54,7 +54,7 @@ router.post('/:id', (req, res) => {
 })
 
 router.get('/:id', (req, res) => {
-  Clinic.findOne({ _id: req.params.id }).then(data => {
+  Clinic.findOne({ _id: req.params.id }).populate('doctors').then(data => {
     res.send({ text: 'success', data: data })
   })
 })
