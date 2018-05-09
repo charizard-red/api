@@ -22,6 +22,7 @@ router.post('/', (req,res) => {
   new Doctor({
     name: req.body.name,
     time: req.body.time,
+    photo: req.body.photo,
     cost: req.body.cost,
     specialist: req.body.specialist,
     clinic: req.body.clinic
