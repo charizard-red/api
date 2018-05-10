@@ -9,10 +9,9 @@ router.get('/', (req,res) => {
   .populate('user_id')
   .populate('doctor_id')
   .populate('clinic_id')
-  .exec(function(error, Orders){
-    if (error) return res.send(error)
-    res.send({data: Orders})
-  });
+  .then(data => {
+    res.send(data)
+  }).catch(err => res.send(err))
 });
 
 router.get('/:id', (req,res) => {
