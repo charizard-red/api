@@ -10,6 +10,7 @@ module.exports = (req, res, next) => {
         Users.findOne({ _id: data.user }).then(data_user => {
           if(data_user == null) return res.send({ text: 'error', msg: 'User is not exist' })
           req.auth = {
+            _id: data_user._id,
             username: data_user.username,
             email: data_user.email,
             admin: data_user.admin,
