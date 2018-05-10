@@ -19,7 +19,7 @@ router.get('/:id', (req,res) => {
   });
 });
 
-router.get('/user/:id', (req,res) => {
+router.get('/:id/user', (req,res) => {
   Order.find({'user_id._id': req.params.id})
   .exec(function(error, data){
     if (error) return res.send(error)
