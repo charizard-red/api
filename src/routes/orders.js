@@ -12,7 +12,7 @@ router.get('/', (req,res) => {
 });
 
 router.get('/:id', (req,res) => {
-  Order.findOne({_id:req.params.id}).exec(function(error, data){
+  Order.find({clinic_id: req.params.id}).exec(function(error, data){
     if (error) return res.send(error)
     res.send({data: data})
   });
