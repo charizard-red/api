@@ -12,6 +12,7 @@ module.exports = (req, res, next) => {
           req.auth = {
             username: data_user.username,
             email: data_user.email,
+            admin: data_user.admin,
             data: {
               gender: data_user.data.gender,
               phone: data_user.data.phone,

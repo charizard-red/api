@@ -5,6 +5,7 @@ const data_schema = mongoose.Schema({
   google_id: String,
   password: String,
   email: String,
+  admin: Boolean,
   data_complete: Boolean,
   data: {
     gender: String,
