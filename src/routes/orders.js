@@ -9,7 +9,7 @@ router.get('/', (req,res) => {
   .populate('user_id')
   .populate('doctor_id')
   .populate('clinic_id')
-  .exec(function(error, Orders){
+  .exec(function(data, error){
     if (error) return res.send(error)
     res.send({data: Orders})
   });
