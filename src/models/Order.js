@@ -6,6 +6,7 @@ const OrdersSchema = Schema({
   doctor_id: { type: Schema.Types.ObjectId, ref: 'Doctors' },
   clinic_id: { type: Schema.Types.ObjectId, ref: 'Clinics' },
   day: String,
+  accept: Boolean,
   time: { type: Date, default: Date.now }
 })
 

@@ -27,14 +27,17 @@ router.post('/', jwt_token, (req,res) => {
   Order.create({
     user_id: req.user_id,
     doctor_id: req.body.specialist,
-    day: req.body.day
+    day: req.body.day,
+    accept: false
   }).then(data => {
     res.send({data:data});
   }).catch(err => res.send({text: 'error', msg: err }))
 });
 
 router.put('/:id', (req,res) => {
-  Order.findByIdAndUpdate({_id:req.params.id}, req.body).then(function(data){
+  Order.findByIdAndUpdate({_id:req.params.id}, {
+    accept: true
+  }).then(function(data){
     Order.findOne({_id:req.params.id}).then(function(error, Orders){
     if(error) return res.send(error)
     res.send({data:Orders});
