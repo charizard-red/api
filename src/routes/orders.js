@@ -16,8 +16,8 @@ router.get('/:id', (req,res) => {
   .populate('user_id')
   .populate('doctor_id')
   .populate('clinic_id')
-  .exec(function(error, data){
-    if (error) return res.send(error)
+  .exec(function(data, err){
+    if (err) return res.send(err)
     res.send({data: data})
   });
 });
