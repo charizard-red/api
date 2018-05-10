@@ -5,7 +5,11 @@ const router = express.Router();
 const jwt_token = require('../middlewares/jwt-token')
 
 router.get('/', (req,res) => {
-  Order.find({}).exec(function(error, Orders){
+  Order.find({})
+  .populate('user_id')
+  .populate('doctor_id')
+  .populate('clinic_id')
+  .exec(function(error, Orders){
     if (error) return res.send(error)
     res.send({data: Orders})
   });
