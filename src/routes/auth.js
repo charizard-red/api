@@ -4,7 +4,6 @@ const jwt = require('jsonwebtoken')
 const router = express.Router()
 
 const Users = require('../models/Users')
-const Orders = require('../models/Orders')
 const jwt_token = require('../middlewares/jwt-token')
 
 router.get('/', jwt_token, (req, res) => {
@@ -59,14 +58,6 @@ router.post('/login', (req, res) => {
     }
   }).catch(err => res.send({ text: 'error', msg: err }))
 })
-
-router.get('/orders/:id', (req,res) => {
-  Orders.find({'user_id._id': req.params.id})
-  .exec(function(error, data){
-    if (error) return res.send(error)
-    res.send({data: data})
-  });
-});
 
 router.post('/register', (req, res) => {
   Users.findOne({ email: req.body.email }).then(data => {
