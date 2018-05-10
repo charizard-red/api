@@ -26,7 +26,8 @@ router.post('/', jwt_token, (req,res) => {
   if(req.auth.data_complete==false) return res.send({ test: 'error', msg: 'User data is not complete' })
   Order.create({
     user_id: req.user_id,
-    doctor_id: req.body.specialist,
+    doctor_id: req.body.doctor_id,
+    clinic_id: req.body.clinic_id
     day: req.body.day,
     accept: false
   }).then(data => {
