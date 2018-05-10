@@ -6,7 +6,6 @@ const jwt_token = require('../middlewares/jwt-token')
 
 router.get('/', (req,res) => {
   Order.find({})
-  .populate('user_id')
   .then(data => {
     res.send(data)
   }).catch(err => res.send(err))
@@ -23,7 +22,7 @@ router.get('/:id', (req,res) => {
 router.post('/', jwt_token, (req,res) => {
   if(req.auth.data_complete==false) return res.send({ test: 'error', msg: 'User data is not complete' })
   Order.create({
-    user_id: req.user_id,
+    user_id: req.auth,
     doctor_id: req.body.doctor_id,
     clinic_id: req.body.clinic_id,
     day: req.body.day,
